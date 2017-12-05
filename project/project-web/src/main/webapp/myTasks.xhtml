@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templateM.xhtml">
+	<ui:define name="header">
+	   
+	</ui:define>
+	<ui:define name="content">
+	  
+	  
+	  
+	  
+	  <h:form>
+	  
+    <p:dataList value="#{myTasksBean.ts}" var="t" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
+        <f:facet name="header">
+          Vos taches
+        </f:facet>
+        <p:commandLink  action="#{myTasksBean.terminer()}" title="Marquer comme terminer" styleClass="ui-icon fa-send" style="float:left;margin-right:10px">
+            <f:setPropertyActionListener value="#{t}" target="#{myTasksBean.t}" />
+          </p:commandLink>
+            <h:outputText value="#{t.libelle}, #{t.etat} , #{t.cout}" />
+        
+       
+    </p:dataList>
+ 
+
+          </h:form>
+
+	  
+	</ui:define>
+	<ui:define name="footer">
+	    Add your footer here or delete to use the default
+	</ui:define>
+</ui:composition>
+</html>

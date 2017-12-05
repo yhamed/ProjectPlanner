@@ -1,0 +1,104 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="templateM.xhtml">
+
+	
+
+	
+	<ui:define name="CSS">
+		
+	</ui:define>
+
+	
+	<ui:define name="header">
+	  <f:metadata>
+        <f:viewAction action="#{authenticationBean.redirectM}"></f:viewAction>
+    </f:metadata>
+	</ui:define>
+	
+	<ui:define name="content" >
+
+	<h:form id="form">
+  
+ <p:messages id="messages" showDetail="true" autoUpdate="true" />
+  <br/>
+  
+  
+    <p:dataList value="#{membreBean.projets}" var="p" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
+        <f:facet name="header">
+           Project List
+        </f:facet>
+        <p:commandLink update=":form:projs" oncomplete="PF('carDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+            <f:setPropertyActionListener value="#{p}" target="#{membreBean.proj}" />
+            <h:outputText value="#{p.titre}, #{p.description}" />
+        </p:commandLink>
+       
+        <p:commandLink id="nonAjax" actionListener="#{membreBean.redirectViewProj}" ajax="false">
+        <f:setPropertyActionListener value="#{p}" target="#{chefBean.proj}" />
+        <h:outputText value="#{p.titre}, #{p.description}" style="display:inline-block"/>
+    </p:commandLink>
+        <!--  A faire! !!!!!!!!!!!!!!!! -->
+        <!-- 
+         <p:commandLink title="Voir sous-projet" action="" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+            <f:setPropertyActionListener value="#{p}" target="#{membreBean.proj}" />
+            <h:outputText value="Voir sous-projects" />
+        </p:commandLink> -->
+    </p:dataList>
+ 
+    <p:dialog header="Projets" widgetVar="carDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+        <p:outputPanel id="projs" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty membreBean.proj}" >
+               
+ 
+                <h:outputLabel value="Id:" style="color:black;"/>
+                <h:outputText value="#{membreBean.proj.id}" />
+ 
+                <h:outputLabel value="Titre:" style="color:black;"/>
+                <h:outputText value="#{membreBean.proj.titre}" />
+ 
+                <h:outputLabel value="Description:" style="color:black;"/>
+                <h:outputText value="#{membreBean.proj.description}" style="color:#{dataListView.selectedCar.color}"/>
+ 
+                <h:outputLabel value="Cout:" style="color:black;"/>
+                <h:outputText value="$#{membreBean.proj.cout}" />
+                
+                 <h:outputLabel value="Date Début:" style="color:black;"/>
+                <h:outputText value="#{membreBean.proj.datedebut}" />
+                
+                <h:outputLabel value="Date Achevement:" style="color:black;"/>
+                <h:outputText value="#{membreBean.proj.dateachevement}" />
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+  <br/>
+    <h:form>
+<p:growl id="growl" showSummary="true" showDetail="true" autoUpdate="true"/>
+ </h:form>
+<p:timeline id="timeline" value="#{membreBean.model}" height="250px" 
+        selectable="#{membreBean.selectable}" 
+        zoomable="#{membreBean.zoomable}" 
+        moveable="#{membreBean.moveable}" 
+        stackEvents="#{membreBean.stackEvents}" 
+        axisOnTop="#{membreBean.axisOnTop}"              
+        eventStyle="#{membreBean.eventStyle}" 
+        showCurrentTime="#{membreBean.showCurrentTime}" 
+        showNavigation="#{membreBean.showNavigation}"> 
+ 
+    <p:ajax event="select" listener="#{membreBean.onSelect}"/>  
+ 
+</p:timeline>
+</h:form>
+	
+		
+	</ui:define>
+	
+	
+	
+	
+	
+	
+</ui:composition>
+</html>

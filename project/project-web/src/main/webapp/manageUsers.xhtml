@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="header">
+	   <f:metadata>
+        <f:viewAction action="#{authenticationBean.redirectC}"></f:viewAction>
+    </f:metadata>
+	</ui:define>
+	<ui:define name="content">
+	  <h:form>
+	    <p:messages id="messages" showDetail="true" autoUpdate="true" />
+	    
+	   <p:growl id="growl" />
+	 
+                 <p:message for="firstname" />
+  
+    
+     <p:message for="lastname" />  
+   
+    <h:panelGrid columns="2" id="matchGrid" cellpadding="5" >  
+    
+    
+     <h:outputLabel for="user"  value="Selectionner un utilisateur pour le modifier" />
+            <h:selectOneMenu  id="user"  converter="omnifaces.SelectItemsConverter" value="#{userManagementBean.user}" >
+           <p:ajax event="change" listener="#{userManagementBean.swap()}" update="matchGrid"/>
+            <f:selectItem itemLabel="choix de personne" itemValue="#{userManagementBean.user}"  noSelectionOption="true" />
+             <f:selectItems value="#{userManagementBean.per}" />
+            </h:selectOneMenu>
+             
+     
+     
+     
+            <h:outputLabel for="firstname" value="Nom: *" />
+            <p:inputText id="firstname" value="#{userManagementBean.personne.nom}" required="true" label="Firstname">
+                <f:validateLength minimum="2" />
+            </p:inputText>
+         
+ 
+             
+            <h:outputLabel for="lastname" value="Login: *" />
+            <p:inputText readonly="#{userManagementBean.vU}" id="lastname" value="#{userManagementBean.personne.login}" required="true" label="Lastname"/>
+           
+            
+                  
+                      
+        <h:outputLabel for="pwd1" value="Mot de passe: *" />
+        <p:password feedback="true" id="pwd1" value="#{userManagementBean.personne.password}" match="pwd2" label="Password 1" required="true" />
+ 
+        <h:outputLabel for="pwd2" value="Confim Mot de passe: *" />
+        <p:password id="pwd2" value="#{userManagementBean.personne.password}" label="Password 2" required="true" />
+   
+   <p:outputLabel  for="s" value="Sexe: " />
+        <p:selectOneButton id="s" value="#{userManagementBean.personne.sexe}">
+            <f:selectItem itemLabel="Homme" itemValue="m" />
+            <f:selectItem itemLabel="Femme" itemValue="f" />
+        </p:selectOneButton>
+   
+   
+  <h:outputLabel for="questionStatus" value="Role" />
+            <h:selectOneMenu id="questionStatus" value="#{userManagementBean.personne.role}" >
+             <f:selectItems value="#{userManagementBean.statuses}" />
+            </h:selectOneMenu>
+            
+            <h:outputLabel for="phone" value="Téléphone: " />
+            <p:inputText id="phone" value="#{userManagementBean.personne.telephone}"  label="Phone:">
+                <f:validateLength minimum="2" />
+            </p:inputText>
+ 
+      
+    </h:panelGrid>
+ 
+ <p:commandButton action="#{userManagementBean.doUpdate}" icon="fa fa-refresh" ajax="false" value="Update" />
+          <p:commandButton action="#{userManagementBean.doAdd}"  ajax="false" value="Add new" />
+  
+</h:form>
+	</ui:define>
+	<ui:define name="footer">
+	    Add your footer here or delete to use the default
+	</ui:define>
+</ui:composition>
+</html>

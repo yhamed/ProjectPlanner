@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="templateM.xhtml">
+
+	
+
+	
+	<ui:define name="CSS">
+		
+	</ui:define>
+
+	
+	<ui:define name="header">
+	  <f:metadata>
+        <f:viewAction action="#{authenticationBean.redirectM}"></f:viewAction>
+    </f:metadata>
+	</ui:define>
+	
+	<ui:define name="content" >
+           
+            
+
+     <h:form id="formid">
+   
+   <p:commandButton value="Refresh" icon="fa fa-refresh" ajax="false"  style="margin-right:5px"/>
+    
+ <hr/>
+ 
+ 
+ 
+ 
+    <p:dataList value="#{mesprojetBean.projets}" var="p" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
+        <f:facet name="header">
+          Your projects
+        </f:facet>
+        <p:commandLink  oncomplete="PF('Dialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+            <f:setPropertyActionListener value="#{p}" target="#{mesprojetBean.proj}" />
+            <h:outputText value="#{p.titre}, #{p.description}" />
+        </p:commandLink>
+        <p:commandLink  actionListener="#{mesprojetBean.ViewProjet}" title="View Detail" ajax="false">
+            <f:setPropertyActionListener value="#{p}" target="#{chefBean.proj}" />
+        <h:outputText value="#{p.titre}, #{p.description}" style="display:inline-block"/>
+    </p:commandLink>
+    </p:dataList>
+ 
+    <p:dialog header="Projets" widgetVar="Dialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+        <p:outputPanel id="projts" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty mesprojetBean.proj}" >
+               
+ 
+                <h:outputLabel value="Id:" style="color:black;"/>
+                <h:outputText value="#{mesprojetBean.proj.id}" />
+ 
+                <h:outputLabel value="Titre:" style="color:black;"/>
+                <h:outputText value="#{mesprojetBean.proj.titre}" />
+ 
+                <h:outputLabel value="Description:" style="color:black;"/>
+                <h:outputText value="#{mesprojetBean.proj.description}" />
+ 
+                <h:outputLabel value="Cout:" style="color:black;"/>
+                <h:outputText value="$#{mesprojetBean.proj.cout}" />
+                
+                   <h:outputLabel value="Date Début:" style="color:black;"/>
+                <h:outputText value="#{mesprojetBean.proj.datedebut}" />
+                
+                <h:outputLabel value="Date Achevement:" style="color:black;"/>
+                <h:outputText value="#{mesprojetBean.proj.dateachevement}" />
+                
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+          </h:form>
+ 
+
+        
+                          
+                             
+                             <hr/>
+                             <hr/>
+                           
+                       <hr/>
+                       <hr/>
+                       <div style="color:#3343b7; font-size:1em;font-family: cursive;" >
+                       <h:form  rendered="#{mesprojetBean.visibility}">
+                        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                      
+                       <p:outputLabel value="Titre"  />
+                       <p:inputText value="#{mesprojetBean.proj.titre}"/>
+                    
+                       <p:outputLabel value="Description" />
+                       <p:inputText value="#{mesprojetBean.proj.description}" />
+                    
+                       <h:outputLabel value="Site" />
+                       <p:inputText value="#{mesprojetBean.proj.site}"/>
+                     
+                       
+                       <p:outputLabel for="button" value="Date d'achévement:" />	
+        <p:calendar id="button" value="#{mesprojetBean.date}" showOn="button" />
+                   
+          <p:commandButton value="Add" id="nonAjax3" actionListener="#{mesprojetBean.doAddModif()}" ajax="false" />
+          <p:commandButton value="Cancel" id="nonAjax4" actionListener="#{mesprojetBean.Cancel()}" ajax="false" />
+                    
+</h:panelGrid>
+           </h:form>
+           </div>
+          <hr/>
+          
+         
+</ui:define>
+</ui:composition>
+</html>

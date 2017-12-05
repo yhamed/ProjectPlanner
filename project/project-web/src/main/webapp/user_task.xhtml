@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="template.xhtml">
+
+	<ui:define name="CSS">
+		
+	</ui:define>
+
+	
+	<ui:define name="header">
+	  <f:metadata>
+        <f:viewAction action="#{authenticationBean.redirectC}"></f:viewAction>
+    </f:metadata>
+	</ui:define>
+	
+	<ui:define name="content" >
+	<br/>
+	  <h:form style="width:70%">
+	  <p:messages autoUpdate="true"/>
+    <p:panel header="Ajouter des ressources" style="border-color:black;border-style:ridge;border-radius: 5px;;
+    border-radius: 4px;" > 
+        
+        
+ <div style="color:#3343b7; font-size:1em;font-family: cursive;" >
+ <p:growl id="msgs" showDetail="true" />
+  <p:growl id="msg" showDetail="true" escape="false" />
+        <h:panelGrid id="grid" columns="2" cellpadding="5" >
+          
+       
+        
+     
+       <div></div>
+       
+ <h:form>
+    <p:panel header="Selectionner une tache et un utilistateur " style="margin-bottom:10px;">
+       <h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel for="country" value="Sous-projet: " />
+            <p:selectOneMenu id="country" value="#{ressourcesBean.sp}" converter="omnifaces.SelectItemsConverter" style="width:150px">
+                <p:ajax listener="#{ressourcesBean.onSPChange()}" update="city" />
+                <f:selectItem itemLabel="choix de sous-projer" itemValue="#{ressourcesBean.sp}" noSelectionOption="true" />
+                <f:selectItems value="#{ressourcesBean.sps}" />
+            </p:selectOneMenu>
+ 
+            <p:outputLabel for="city" value="Tache: " />
+            <p:selectOneMenu id="city" value="#{userTaskBean.t}" converter="omnifaces.SelectItemsConverter" style="width:150px">
+                <p:ajax listener="#{ressourcesBean.UpdateDroped}" update="city" />
+                <f:selectItem itemLabel="Selectionner une tache" itemValue="#{ressourcesBean.t}" noSelectionOption="true" />
+                <f:selectItems value="#{ressourcesBean.taches}" />
+            </p:selectOneMenu>
+      
+        <p:outputLabel for="user" value="Membre: " />
+  <h:selectOneMenu  id="user"  converter="omnifaces.SelectItemsConverter" value="#{userTaskBean.p}" >
+            <f:selectItem itemLabel="choix de personne" itemValue="#{userManagementBean.user}"  noSelectionOption="true" />
+             <f:selectItems value="#{userManagementBean.per}" />
+            </h:selectOneMenu>
+            
+              </h:panelGrid>
+            </p:panel>
+        <p:commandButton action="#{userTaskBean.sub}" ajax="false" value="Attribuer la tache"/>
+
+       
+       
+       
+       </h:form>
+       
+       
+       
+       	
+       
+       
+          </h:panelGrid>
+          
+	          
+            <br/>
+
+        
+        
+        </div>
+        
+        
+    </p:panel>
+    
+</h:form>
+
+		<br/>
+    
+	
+		
+	</ui:define>
+</ui:composition>
+</html>

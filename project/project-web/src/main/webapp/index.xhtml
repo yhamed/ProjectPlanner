@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	 xmlns:p="http://primefaces.org/ui">
+	
+<h:head>
+  <meta charset="UTF-8"/>
+  
+<div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Project planner</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+               <br/>
+            
+      
+            </ul>
+        </div>
+    </div>
+    <!-- /container -->
+    </div>
+  <title>se connecter</title>
+  <p:messages showDetail="true"/>
+  
+  
+      
+<link href="css/logincss.css" rel="stylesheet" />
+		
+  
+</h:head>
+
+<h:body style="background-color:grey;">
+  <div class="login" style="background-color: #696969;" >
+  <div class="heading" style="background-color: #696969; ">
+    <h2 style="color:#E0FFFF"><b>Connectez-vous</b></h2>
+      <div class="navbar-header">
+    <h:form >
+<p:growl id="message" showDetail="true" />
+      <div  class="buttonHolder" >
+        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        
+      
+        <p:inputText  id="login" label="Login" value="#{authenticationBean.login}" required="true" />
+          </div>
+
+        <div class="buttonHolder">
+          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+         
+        
+        <p:password id="inlineFeedback" label="Password" value="#{authenticationBean.pass}"  required="true" />
+ 
+        </div>
+        <div class="input-group input-group-lg">
+     <span class="input-group-addon">
+     
+    <p:captcha label="Captcha" />
+      <p:commandButton value="Submit" style="color:black;" id="nonAjax" actionListener="#{authenticationBean.connect}" ajax="false" update="message"/>
+      </span> </div>
+        
+       </h:form>
+       </div>
+       <br/>
+ 		<hr/>
+ 		<br/>
+ 		
+ 		</div>
+ 		
+ </div>
+  
+  <br/>
+ 		
+</h:body>
+<footer>
+<div style="background-color: grey;" >
+<br/>
+ 		<br/>
+ 		<br/><br/>
+ 		<br/>
+ 		<br/>
+</div>
+</footer>
+</html>

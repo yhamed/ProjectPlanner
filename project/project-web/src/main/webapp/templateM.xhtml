@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+		<meta charset="utf-8"/>
+		<title>Project Planner</title>
+		
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+		 <link href="css/styles.css" rel="stylesheet" />
+		 <link href="css/bootstrap.css" rel="stylesheet" />
+		 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.cs"  />
+<script src="https://use.fontawesome.com/9dbdd80e2d.js"></script>
+	
+	</h:head>
+	<h:body>
+
+<div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Gestion et suivi des projets</a>
+           
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+               <br/>
+                <li>           
+    <p:growl id="message" showDetail="true" />
+ 
+   <h:form> 
+    <p:commandButton action="#{authenticationBean.logout}" value="Deconnexion"  update="message" style="margin-right:20px;">
+        <p:confirm header="Confirmation" message="vous voulez déconnectez?" icon="ui-icon-alert" />
+    </p:commandButton>
+ 
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+        <p:commandButton ajax="false"  value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+    </p:confirmDialog>
+        </h:form> 
+        <br/>  </li> 
+            </ul>
+        </div>
+    </div>
+    <!-- /container -->
+    </div>
+    
+
+<!-- /Header -->
+
+<!-- Main -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3">
+            <!-- Left column -->
+           <h1 style="color:blue"> Plannification des projets</h1>
+
+            
+
+            <ul class="nav nav-stacked">
+                <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#userMenu"></a>
+                    <ul  style="color:blue; font-size:1.2em;" id="userMenu">
+                        
+				<li>		<p:commandLink id="ajax"  actionListener="#{authenticationBean.Acueil}">
+      <i class="glyphicon glyphicon-cog"></i>  <h:outputText value="Accueil" />
+    </p:commandLink></li> <br/>	
+    <li><a href="mesprojetM.jsf"><i class="glyphicon glyphicon-cog"> </i> Mes projets</a></li><br/>
+					    <li><a href="alertes.jsf"><i class="glyphicon glyphicon-envelope"></i> Alerte(#{alertesBean.nbAlerts}) </a></li><br/>
+					    <li><a href="myTasks.jsf"><i class="glyphicon glyphicon-envelope"></i> Mes taches </a></li>
+                   </ul>
+                    </li>     
+            </ul>
+        </div>
+		
+		
+        <!-- /col-3 -->
+        <div class="col-sm-9">
+
+          
+           
+               <section id="content" >
+    
+    <div class="main">
+    <ui:insert name="header"></ui:insert>
+    <ui:insert name="content"></ui:insert>
+    </div>
+    </section>
+           </div>
+      
+         
+           
+           <br/>
+          
+</div><br/><br/><br/><br/>
+ <p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" />
+</div>
+<!-- /.modal -->
+	<!-- script references -->
+	<h:form>
+    <p:growl id="messages" showDetail="true" sticky="true" />
+ 
+    <p:idleMonitor timeout="50000">
+        <p:ajax event="idle" listener="#{idleMonitorView.onIdle}" update="messages" />
+        <p:ajax event="active" listener="#{idleMonitorView.onActive}" update="messages" />
+    </p:idleMonitor>
+</h:form>
+		<h:outputScript library="js" name="scripts.js" />
+		<h:outputScript library="js" name="bootstrap.js" />
+	</h:body>
+
+
+</h:html>

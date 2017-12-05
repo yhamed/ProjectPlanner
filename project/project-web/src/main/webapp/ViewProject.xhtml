@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="header">
+	   
+	</ui:define>
+	<ui:define name="content">
+	  
+	  
+	  
+	  
+	  
+	  
+	  <h:form>
+	  
+    <h3 style="margin-top:0">#{viewProjectBean.projet.titre}</h3>
+ 
+    <p:tree value="#{viewProjectBean.root}" var="node" orientation="horizontal">
+        <p:treeNode>
+          <p:commandLink id="nonAjax" actionListener="#{viewProjectBean.sP()}" ajax="false">
+    
+            <h:outputText value="#{node}" /> </p:commandLink>
+  
+        </p:treeNode>
+    </p:tree>
+
+  
+</h:form>
+	  <h:form >
+	  
+	 
+  
+	  </h:form>
+	  
+
+	  
+	</ui:define>
+	<ui:define name="footer">
+	    Add your footer here or delete to use the default
+	</ui:define>
+</ui:composition>
+</html>

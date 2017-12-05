@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="header">
+	   
+	</ui:define>
+	<ui:define name="content">
+	  
+	       <h:form id="formid">
+     <p:commandButton value="Add Sous-Projet" id="nonAjax" actionListener="#{sousProjetBean.showAdd()}" ajax="false" />
+  <p:commandButton value="modifier Sous-projet" id="nonAjax1" actionListener="#{sousProjetBean.showEdit()}" ajax="false" />
+ <p:commandButton value="Supprimer Projet" id="nonAjax2" actionListener="#{sousProjetBean.doDelete()}" ajax="false" />
+ <hr/>
+           <p:commandButton id="nonAjax5" value="Refresh" icon="fa fa-refresh" ajax="false" />
+ <hr/>
+ 
+ 
+ 
+ 
+    <p:dataList value="#{sousProjetBean.projet.sousprojet}" var="p" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
+        <f:facet name="header">
+          Les Sous-Projets de #{sousProjetBean.projet.titre}
+        </f:facet>
+        <p:commandLink  oncomplete="PF('Dialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+            <f:setPropertyActionListener value="#{p}" target="#{sousProjetBean.sousproj}" />
+            <h:outputText value="#{p.titre}, #{p.description}" />
+        </p:commandLink>
+        <p:commandLink action="#{sousProjetBean.redirectViewTache()}"   ajax="false">
+            <f:setPropertyActionListener value="#{p}" target="#{sousProjetBean.sousproj}" />
+        <h:outputText value="#{p.titre}, #{p.description}" style="display:inline-block"/>
+    </p:commandLink>
+    </p:dataList>
+ 
+    <p:dialog header="Projets" widgetVar="Dialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+        <p:outputPanel id="projts" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty sousProjetBean.projet.sousprojet}" >
+               
+ 
+                <h:outputLabel value="Id:" style="color:black;"/>
+                <h:outputText value="#{sousProjetBean.sousproj.id}" />
+ 
+                <h:outputLabel value="Titre:" style="color:black;"/>
+                <h:outputText value="#{sousProjetBean.sousproj.titre}" />
+ 
+                <h:outputLabel value="Description:" style="color:black;"/>
+                <h:outputText value="#{sousProjetBean.sousproj.description}" />
+                
+                   <h:outputLabel value="Date Début:" style="color:black;"/>
+                <h:outputText value="#{sousProjetBean.sousproj.datedebut}" />
+                
+                <h:outputLabel value="Date Achevement:" style="color:black;"/>
+                <h:outputText value="#{sousProjetBean.sousproj.dateachevement}" />
+                
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+          </h:form>
+ 
+	  
+	  
+	  
+	   <h:form  rendered="#{sousProjetBean.visibility}">
+                        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                      
+                       <p:outputLabel value="Titre"  />
+                       <p:inputText value="#{sousProjetBean.sousproj.titre}"/>
+                    
+                       <p:outputLabel value="Description" />
+                       <p:inputText value="#{sousProjetBean.sousproj.description}" />
+                    
+                       
+                  
+                       <p:outputLabel for="button" value="Button:" />	
+        <p:calendar id="button" value="#{sousProjetBean.date}" showOn="button" />
+                    
+        <p:commandButton value="Add" id="nonAjax3" actionListener="#{sousProjetBean.doAddSP()}" ajax="false" />
+  <p:commandButton id="nonAjax7" value="Update" actionListener="#{sousProjetBean.doUpdateSP()}" icon="fa fa-refresh" ajax="false" />
+
+      <p:commandButton value="Cancel" id="nonAjax4" actionListener="#{sousProjetBean.cancel()}" ajax="false" />
+                  
+</h:panelGrid>
+           </h:form>
+	  
+	  
+	  
+	  
+	
+	  
+	</ui:define>
+	<ui:define name="footer">
+	    Add your footer here or delete to use the default
+	</ui:define>
+</ui:composition>
+</html>
