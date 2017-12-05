@@ -19,9 +19,9 @@
 	<ui:define name="content" >
 	<br/><script type="text/javascript">
     function handleDrop(event, ui) {
-        var droppedCar = ui.draggable;
+        var droppedR = ui.draggable;
  
-        droppedCar.fadeOut('fast');
+        droppedR.fadeOut('fast');
     }
 </script>
    <f:metadata>
@@ -77,10 +77,10 @@
        
         <!-- yaw lehnééé!! -->
        
-       <h:form id="carForm" >
+       <h:form id="RForm" >
        
-    <p:fieldset id="availableCarsField" legend="Ressources disponible">
-        <p:dataTable id="availableCars" var="r" value="#{ressourcesBean.ressources}">
+    <p:fieldset id="availableRsField" legend="Ressources disponible">
+        <p:dataTable id="availableRs" var="r" value="#{ressourcesBean.ressources}">
             <p:column style="width:20px">
                 <h:outputText id="dragIcon" styleClass="ui-icon ui-icon-arrow-4" />
                 <p:draggable for="dragIcon" revert="true" helper="clone"/>
@@ -93,10 +93,10 @@
         </p:dataTable>
     </p:fieldset>
  
-    <p:fieldset id="selectedCars" legend="Ressources selectionner" style="margin-top:20px">
+    <p:fieldset id="selectedRs" legend="Ressources selectionner" style="margin-top:20px">
         <p:outputPanel id="dropArea">
             <h:outputText value="!!!Drop here!!!" rendered="#{empty ressourcesBean.dropedRessources}" style="font-size:24px;" />
-            <p:dataTable id="selectedCarsTable" var="r" value="#{ressourcesBean.dropedRessources}" rendered="#{not empty ressourcesBean.dropedRessources}">
+            <p:dataTable id="selectedRsTable" var="r" value="#{ressourcesBean.dropedRessources}" rendered="#{not empty ressourcesBean.dropedRessources}">
                 <p:column headerText="Nom">
                     <h:outputText value="#{r.nom}" />
                 </p:column>
@@ -107,11 +107,11 @@
         </p:outputPanel>
     </p:fieldset>
  
-    <p:droppable for="selectedCars" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availableCars" onDrop="handleDrop">
-        <p:ajax listener="#{ressourcesBean.onRDrop}" update="dropArea availableCars" />
+    <p:droppable for="selectedRs" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availableRs" onDrop="handleDrop">
+        <p:ajax listener="#{ressourcesBean.onRDrop}" update="dropArea availableRs" />
     </p:droppable>
  <!--  -->
-    <p:dialog header="Car Detail" widgetVar="carDialog" resizable="false" draggable="false"
+    <p:dialog header="R Detail" widgetVar="RDialog" resizable="false" draggable="false"
                 showEffect="fade" hideEffect="fade" modal="true">
  
         <p:outputPanel id="display">
